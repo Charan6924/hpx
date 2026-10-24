@@ -179,8 +179,7 @@ void test_chunk_size_larger_than_count()
 
     for (std::size_t count = 1; count != 9; ++count)
     {
-        for (std::size_t chunk_size = count + 1; chunk_size != 12;
-            ++chunk_size)
+        for (std::size_t chunk_size = count + 1; chunk_size != 12; ++chunk_size)
         {
             auto first =
                 chunk_size_iterator<int*>(data.data(), chunk_size, count);
