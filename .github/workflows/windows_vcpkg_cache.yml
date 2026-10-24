@@ -1,0 +1,30 @@
+# Copyright (c) 2026 The STE||AR Group
+#
+# SPDX-License-Identifier: BSL-1.0
+# Distributed under the Boost Software License, Version 1.0. (See accompanying
+# file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+
+# Fills the vcpkg binary cache of the Windows workflows on the default branch.
+# A cache saved by a pull request is visible to that pull request only, while
+# a cache saved on the default branch is visible to all of them.
+
+name: Windows vcpkg cache
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - '.github/vcpkg/**'
+      - '.github/actions/setup-vcpkg/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2022
+    permissions:
+      contents: read
+
+    steps:
+    - uses: actions/checkout@v7
+    - name: Install dependencies
+      uses: ./.github/actions/setup-vcpkg
